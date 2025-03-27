@@ -1,4 +1,5 @@
 import uuid
+import datetime
 from app.database import db
 
 class PasswordEntry(db.Model):
@@ -9,8 +10,8 @@ class PasswordEntry(db.Model):
     url = db.Column(db.String(255), nullable=False)
     favicon = db.Column(db.String(255), nullable=False)
     folder_id = db.Column(db.String(36), db.ForeignKey("folder.id"), nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def get_favicon(self):
         return self.favicon
@@ -24,6 +25,6 @@ class PasswordEntry(db.Model):
             "url": self.url,
             "favicon": self.favicon,
             "folder_id": self.folder_id,
-            "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat()
         }
