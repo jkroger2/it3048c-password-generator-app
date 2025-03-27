@@ -12,20 +12,20 @@ Returns a single user from the database for a given ID
 def get_user_by_id(user_id: str):
     user = User.query.get(user_id)
     if not user:
-        raise ValueError('User not found')
+        raise ValueError("User not found")
     return user.to_dict()
 
 """
 Creates a new user in the database
-:param data: A dictionary containing the user's email and password
+:param data: A dictionary containing the user"s email and password
 :return: A dictionary representation of the newly created user
 """
 def create_user(data: Dict):
-    if User.query.filter_by(email=data['email']).first():
-        raise ValueError('User already exists')
+    if User.query.filter_by(email=data["email"]).first():
+        raise ValueError("User already exists")
     
-    user = User(email=data['email'])
-    user.set_password(data['password'])
+    user = User(email=data["email"])
+    user.set_password(data["password"])
     db.session.add(user)
     db.session.commit()
     return user.to_dict()
@@ -40,7 +40,7 @@ Updates an existing user in the database
 def update_user(user_id: str, data: Dict):
     user = User.query.get(user_id)
     if not user:
-        raise ValueError('User not found')
+        raise ValueError("User not found")
 
     for key, value in data.items():
         setattr(user, key, value)
@@ -55,7 +55,7 @@ Deletes a user from the database
 def delete_user(user_id: str):
     user = User.query.get(user_id)
     if not user:
-        raise ValueError('User not found')
+        raise ValueError("User not found")
 
     db.session.delete(user)
     db.session.commit()
