@@ -2,18 +2,21 @@ from typing import Dict
 
 from app.models.user import User
 from app.database import db
+from flask_jwt_extended import create_access_token
 
 
 """
-Returns a single user from the database for a given ID
-:param user_id: The ID of the user to retrieve
-:return: A dictionary representation of the user
+Authenticates a user by checking their credentials against the database
+:param data: A dictionary containing the user"s email and password
+:return: A dictionary containing the user"s access token and user information
 """
-def get_user_by_id(user_id: str):
-    user = User.query.get(user_id)
-    if not user:
-        raise ValueError("User not found")
-    return user.to_dict()
+def authenticate_user(data: Dict):
+    user = User.query.filter_by(email=data["email"]).first()
+    if not user or not user.check_password(data["password"]):
+        raise ValueError("Invalid credentials")
+    access_token = create_access_token(identity=user.id)
+    return {"access_token": access_token, "user": user.to_dict()}
+
 
 """
 Creates a new user in the database
