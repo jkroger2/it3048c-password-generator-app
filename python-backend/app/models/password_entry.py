@@ -11,3 +11,16 @@ class PasswordEntry(db.Model):
     folder_id = db.Column(db.String(36), db.ForeignKey('folder.id'), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'username': self.username,
+            'password': self.password,
+            'url': self.url,
+            'favicon': self.favicon,
+            'folder_id': self.folder_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
