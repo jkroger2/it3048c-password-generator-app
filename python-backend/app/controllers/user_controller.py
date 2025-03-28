@@ -1,11 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services.user_service import (
-    get_user, 
+    authenticate_user,
     create_user,
     update_user,
     delete_user,
-    authenticate_user
 )
 
 user_controller = Blueprint("users", __name__)
@@ -32,7 +31,6 @@ def login_user():
 POST /api/users/v1/register
 
 Registers a new user in the system
-:param data: A dictionary containing the user's email and password
 :return: A dictionary representation of the newly created user
 """
 @user_controller.route("/register", methods=["POST"])
@@ -49,7 +47,6 @@ def create_new_user():
 PUT /api/users/v1
 
 Updates an existing user's information
-:param data: A dictionary containing the fields to update
 :return: A dictionary representation of the updated user
 """
 @user_controller.route("/", methods=["PUT"])
@@ -57,10 +54,7 @@ Updates an existing user's information
 def update_user_info():
     user_id = get_jwt_identity()
     data = request.get_json()
-    
-    if data.get("id") != user_id:
-        return jsonify({"error": "Unauthorized"}), 401
-    
+        
     try:
         user = update_user(user_id, data)
         return jsonify(user)
@@ -72,17 +66,12 @@ def update_user_info():
 DELETE /api/users/v1/
 
 Deletes a user's account from the system
-:param data: A dictionary containing the user's ID
 :return: A dictionary representation of the deleted user
 """
 @user_controller.route("/", methods=["DELETE"])
 @jwt_required()
 def delete_user_account():
     user_id = get_jwt_identity()
-    data = request.get_json()
-    
-    if data.get("id") != user_id:
-        return jsonify({"error": "Unauthorized"}), 401
 
     try:
         user = delete_user(user_id)
