@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services.user_service import (
     authenticate_user,
+    get_user_by_id,
     create_user,
     update_user,
     delete_user,
@@ -21,10 +22,33 @@ Logs in a user by authenticating their credentials
 def login_user():
     data = request.get_json()
     try:
-        user = authenticate_user(data)
-        return jsonify(user)
+        user_details = authenticate_user(data)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "User logged in successfully.",
+            "access_token": user_details["access_token"],
+            "user": {
+                "email": user_details["user"]["email"],
+                "created_at": user_details["user"]["created_at"],
+                "updated_at": user_details["user"]["updated_at"]
+            }
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 401
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "LOGIN_FAILED",
+                "message": str(e)
+            }
+        }), 401
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 
 """
@@ -38,9 +62,23 @@ def create_new_user():
     data = request.get_json()
     try:
         user = create_user(data)
-        return jsonify(user), 201
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "User successfully registered.",
+            "user": {
+                "id": user["id"],
+                "email": user["email"],
+                "created_at": user["created_at"],
+            }
+        }), 201
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
     
 
 """
@@ -57,9 +95,32 @@ def update_user_info():
         
     try:
         user = update_user(user_id, data)
-        return jsonify(user)
+        user = get_user_by_id(user_id)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "User information successfully updated.",
+            "user": {
+                "email": user["email"],
+                "created_at": user["created_at"],
+                "updated_at": user["updated_at"]
+            }
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "USER_NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
     
 
 """
@@ -75,6 +136,28 @@ def delete_user_account():
 
     try:
         user = delete_user(user_id)
-        return jsonify(user)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "User account successfully deleted.",
+            "user": {
+                "email": user["email"],
+                "created_at": user["created_at"],
+                "updated_at": user["updated_at"]
+            }
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "USER_NOT_FOUND",
+                "message": str(e)
+                }
+            }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500

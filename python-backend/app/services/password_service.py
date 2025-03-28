@@ -12,7 +12,7 @@ Returns a password entry from the database for a given password ID
 def get_password_by_id(password_id: str):
     password = Password.query.get(password_id)
     if not password:
-        raise ValueError("Password entry not found")
+        raise ValueError("Password entry not found.")
     
     return password.to_dict()
 
@@ -25,7 +25,7 @@ Returns all password entries from the database for a given user ID
 def get_password_by_user_id(user_id: str):
     password_entries = Password.query.filter_by(user_id=user_id).all()
     if not password_entries:
-        raise ValueError(f"No password entries found for user ID {user_id}")
+        raise ValueError(f"No password entries found for user ID {user_id}.")
     
     return [password_entry.to_dict() for password_entry in password_entries]
 
@@ -60,7 +60,7 @@ Updates an existing password entry in the database
 def update_password(password_id: str, data: Dict):
     password = Password.query.get(password_id)
     if not password:
-        raise ValueError("Password entry not found")
+        raise ValueError("Password entry not found.")
 
     for key, value in data.items():
         setattr(password, key, value)
@@ -76,7 +76,7 @@ Deletes a password entry from the database
 def delete_password(password_id: str):
     password = Password.query.get(password_id)
     if not password:
-        raise ValueError("Password entry not found")
+        raise ValueError("Password entry not found.")
 
     db.session.delete(password)
     db.session.commit()

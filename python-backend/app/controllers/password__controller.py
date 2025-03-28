@@ -25,9 +25,27 @@ def get_user_passwords():
 
     try:
         passwords = get_password_by_user_id(user_id)
-        return jsonify(passwords)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Passwords retrieved successfully.",
+            "passwords": passwords
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 
 """
@@ -50,9 +68,27 @@ def create_password_entry():
             favicon=data.get("favicon"),
             folder_id=data.get("folder_id")
         )
-        return jsonify({"password": password}), 201
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Password entry created successfully.",
+            "password": password
+        }), 201
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "BAD_REQUEST",
+                "message": str(e)
+            }
+        }), 400
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 
 """
@@ -69,13 +105,37 @@ def update_password_entry_info(password_id: str):
     data = request.get_json()
 
     if get_password_by_id(password_id)["user_id"] != user_id:
-        return jsonify({"error": "Unauthorized"}), 403
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "UNAUTHORIZED",
+                "message": "User does not have permission to update this password entry."
+            }
+        }), 403
     
     try:
         password = update_password(password_id, data)
-        return jsonify({"password": password}), 200
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Password entry updated successfully.",
+            "password": password
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+                }
+            }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 
 """
@@ -89,11 +149,34 @@ def delete_password_entry(password_id: str):
     user_id = get_jwt_identity()
 
     if get_password_by_id(password_id)["user_id"] != user_id:
-        return jsonify({"error": "Unauthorized"}), 403
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "UNAUTHORIZED",
+                "message": "User does not have permission to delete this password entry."
+            }
+        }), 403
     
     try:
-        delete_password(password_id)
-        return jsonify({"message": "Password entry deleted"}), 200
+        password = delete_password(password_id)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Password entry deleted successfully.",
+            "password": password
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
-        
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500

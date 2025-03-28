@@ -12,7 +12,7 @@ Returns a single folder from the database for a given ID
 def get_folder_by_id(folder_id: str):
     folder = Folder.query.get(folder_id)
     if not folder:
-        raise ValueError("Folder not found")
+        raise ValueError("Folder not found.")
     return folder.to_dict()
 
 
@@ -24,7 +24,7 @@ Returns all folders from the database for a given user ID
 def get_folders_by_user_id(user_id: str):
     folders = Folder.query.filter_by(user_id=user_id).all()
     if not folders:
-        raise ValueError(f"No folders found for user ID {user_id}")
+        raise ValueError(f"No folders found for user ID {user_id}.")
     
     return [folder.to_dict() for folder in folders]
 
@@ -55,7 +55,7 @@ Updates an existing folder in the database
 def update_folder(folder_id: str, data: Dict):
     folder = Folder.query.get(folder_id)
     if not folder:
-        raise ValueError("Folder not found")
+        raise ValueError("Folder not found.")
 
     for key, value in data.items():
         setattr(folder, key, value)
@@ -71,7 +71,7 @@ Deletes a folder from the database
 def delete_folder(folder_id: str):
     folder = Folder.query.get(folder_id)
     if not folder:
-        raise ValueError("Folder not found")
+        raise ValueError("Folder not found.")
 
     db.session.delete(folder)
     db.session.commit()

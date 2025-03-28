@@ -24,11 +24,28 @@ def get_user_folders():
     user_id = get_jwt_identity()
 
     try:
-        folder = get_folders_by_user_id(user_id)
-        return jsonify(folder)
+        folders = get_folders_by_user_id(user_id)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Folders retrieved successfully.",
+            "folders": folders
+        })
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
-
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 """
 POST /api/folders/v1/
@@ -47,9 +64,27 @@ def create_folder_entry():
             user_id=user_id,
             name=data.get("name")
         )
-        return jsonify({"folder": folder}), 201
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Folder created successfully.",
+            "folder": folder
+        }), 201
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 
 """
@@ -69,10 +104,28 @@ def update_folder_entry(folder_id):
     
     try:
         folder = update_folder(folder_id, data)
-        return jsonify({"folder": folder}), 200
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Folder updated successfully.",
+            "folder": folder
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
+
 
 """
 DELETE /api/folders/v1/<folder_id>
@@ -90,6 +143,25 @@ def delete_folder_entry(folder_id):
     
     try:
         folder = delete_folder(folder_id)
-        return jsonify({"folder": folder}), 200
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Folder deleted successfully.",
+            "folder": folder
+        }), 200
     except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": str(e)
+            }
+        }), 400
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
+        
