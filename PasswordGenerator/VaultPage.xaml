@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordGenerator.VaultPage"
+             Title="Vault">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="plus.png"
+                 Priority="0"
+                 Order="Primary"
+                 Clicked="OnAddPasswordClicked" />
+    </ContentPage.ToolbarItems>
+
+    
+    <Grid RowSpacing="20" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Entry Placeholder="Search" Grid.Row="0" />
+
+
+        <Label Text="Recently Used" FontAttributes="Bold" Grid.Row="1" Margin="0,10,0,0"/>
+
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Tappable Account Card -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Folder List -->
+                <!-- Folder: Social Media -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSocialMediaTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Social Media" Padding="10,0"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <StackLayout x:Name="SocialMediaAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
+
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Instagram" FontSize="16"/>
+                                <Label Text="insta@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Facebook" FontSize="16"/>
+                                <Label Text="fb@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                </StackLayout>
+                <!-- Folder: Financial -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFinancialTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Financial" Padding="10,0"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <StackLayout x:Name="FinancialAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Bank App" FontSize="16"/>
+                                <Label Text="bank@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="PayPal" FontSize="16"/>
+                                <Label Text="paypal@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Folder: Work -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnWorkTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Work" Padding="10,0"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <StackLayout x:Name="WorkAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Slack" FontSize="16"/>
+                                <Label Text="slack@company.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Zoom" FontSize="16"/>
+                                <Label Text="zoom@company.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </StackLayout>
+
+
+                <!-- Folder: Entertainment -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEntertainmentTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Text="Entertainment" Padding="10,0"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <StackLayout x:Name="EntertainmentAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Netflix" FontSize="16"/>
+                                <Label Text="netflix@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout>
+                            <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                            <VerticalStackLayout Padding="10,0,0,0">
+                                <Label Text="Spotify" FontSize="16"/>
+                                <Label Text="music@email.com" FontSize="12" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </StackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+
