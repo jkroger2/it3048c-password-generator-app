@@ -1,1 +1,0 @@
-E:\Aaron\Downloads\it3048c-password-generator-app-main\maui-frontend\PasswordGenerator\PasswordGenerator\PasswordGenerator.csproj;x64
