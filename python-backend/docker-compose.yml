@@ -1,29 +1,32 @@
-version: '3.8'
+version: "3.8"
 
 services:
   password-app-db:
     image: mysql:latest
     restart: always
-    environment: 
-      MYSQL_ROOT_PASSWORD: placeholder_root_password
-      MYSQL_DATABASE: placeholder_db
-      MYSQL_USER: placeholder_username
-      MYSQL_PASSWORD: another_placeholder_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     networks:
       - python_backend
-  
+
   password-app-backend:
     build: .
     restart: always
     depends_on:
       - password-app-db
     environment:
-      DATABASE_URL: mysql://placeholder_username:another_placeholder_password@password-app-db/placeholder_db
-      JWT_SECERET_KEY: placeholder_jwt_secret_key
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE: ${DATABASE}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECERET_KEY: ${JWT_SECRET_KEY}
     ports:
       - "5000:5000"
     volumes:
