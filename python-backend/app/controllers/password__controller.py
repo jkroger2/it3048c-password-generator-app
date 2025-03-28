@@ -34,7 +34,7 @@ def get_user_passwords():
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "ACCOUNTS_NOT_FOUND",
                 "message": str(e)
             }
         }), 404
@@ -124,7 +124,7 @@ def update_password_entry_info(password_id: str):
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "ACCOUNT_NOT_FOUND",
                 "message": str(e)
                 }
             }), 404
@@ -168,7 +168,7 @@ def delete_password_entry(password_id: str):
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "ACCOUNT_NOT_FOUND",
                 "message": str(e)
             }
         }), 404

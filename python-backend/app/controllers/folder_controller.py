@@ -34,7 +34,7 @@ def get_user_folders():
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "FOLDER_NOT_FOUND",
                 "message": str(e)
             }
         }), 404
@@ -73,7 +73,7 @@ def create_folder_entry():
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "FOLDER_NOT_FOUND",
                 "message": str(e)
             }
         }), 404
@@ -113,7 +113,7 @@ def update_folder_entry(folder_id):
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "FOLDER_NOT_FOUND",
                 "message": str(e)
             }
         }), 404
@@ -152,7 +152,7 @@ def delete_folder_entry(folder_id):
         return jsonify({
             "status": "ERROR",
             "error": {
-                "code": "NOT_FOUND",
+                "code": "FOLDER_NOT_FOUND",
                 "message": str(e)
             }
         }), 400
