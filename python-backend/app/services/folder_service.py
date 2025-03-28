@@ -59,8 +59,11 @@ def update_folder(folder_id: str, data: Dict):
 
     for key, value in data.items():
         setattr(folder, key, value)
+
     db.session.commit()
-    return folder.to_dict()
+    
+    updated_folder = Folder.query.get(folder_id)
+    return updated_folder.to_dict()
 
 
 """

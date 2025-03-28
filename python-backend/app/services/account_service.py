@@ -36,16 +36,17 @@ Creates a new account in the database
 :return: A dictionary representation of the newly created account 
 """
 def create_account(data: Dict):
-    account = account(
+    account = Account(
         user_id=data["user_id"],
         username=data["username"],
         account=data["account"],
-        url=data["url"],
-        favicon=data["favicon"],
         folder_id=data["folder_id"],
-        created_at=data["created_at"],
-        updated_at=data["updated_at"]
     )
+
+    if "url" in data:
+        account.set_url(data["url"])
+        account.set_favicon()
+
     db.session.add(account)
     db.session.commit()
     return account.to_dict()
@@ -64,8 +65,14 @@ def update_account(account_id: str, data: Dict):
 
     for key, value in data.items():
         setattr(account, key, value)
+
+        if "url" in data.items:
+            account.set_favicon()
+            
     db.session.commit()
-    return account.to_dict()
+    
+    updated_account = Account.query.get(account_id)
+    return updated_account.to_dict()
 
 
 """

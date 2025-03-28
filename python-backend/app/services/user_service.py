@@ -59,8 +59,11 @@ def update_user(user_id: str, data: Dict):
 
     for key, value in data.items():
         setattr(user, key, value)
+
     db.session.commit()
-    return user.to_dict()
+    
+    updated_user = User.query.get(user_id)
+    return updated_user.to_dict()
 
 
 """

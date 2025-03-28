@@ -1,5 +1,7 @@
 import uuid
 import datetime
+from urllib.parse import urlparse
+
 from app.database import db
 
 class Account(db.Model):
@@ -13,8 +15,16 @@ class Account(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    def get_favicon(self):
-        return self.favicon
+    def set_favicon(self):
+        if self.url:
+            parsed_url = urlparse(self.url)
+            if parsed_url.netloc:  # Ensure valid domain extraction
+                self.favicon = f"https://{parsed_url.netloc}/favicon.ico"
+        return None
+
+    def set_url(self, new_url):
+        self.url = new_url
+        self.favicon = self.get_favicon()
     
     def to_dict(self):
         return {

@@ -51,12 +51,12 @@ def get_user_accounts():
 """
 POST /api/accounts/v1
 
-Creates a new account entry for a user
-:return: A dictionary representation of the newly created account entry
+Creates a new account for a user
+:return: A dictionary representation of the newly created account
 """
 @account_controller.route("/", methods=["POST"])
 @jwt_required()
-def create_account_entry():
+def create_new_account():
     user_id = get_jwt_identity()
     data = request.get_json()
     try:
@@ -70,7 +70,7 @@ def create_account_entry():
         )
         return jsonify({
             "status": "SUCCESS",
-            "message": "account entry created successfully.",
+            "message": "account created successfully.",
             "account": account
         }), 201
     except ValueError as e:
@@ -94,9 +94,9 @@ def create_account_entry():
 """
 PUT /api/accounts/v1/<account_id>
 
-Updates an existing account entry for a user
-:param account_id: The ID of the account entry to update
-:return: A dictionary representation of the updated account entry
+Updates an existing account for a user
+:param account_id: The ID of the account to update
+:return: A dictionary representation of the updated account
 """
 @account_controller.route("/<account_id>", methods=["PUT"])
 @jwt_required()
@@ -109,7 +109,7 @@ def update_existing_accounts(account_id: str):
             "status": "ERROR",
             "error": {
                 "code": "UNAUTHORIZED",
-                "message": "User does not have permission to update this account entry."
+                "message": "User does not have permission to update this account."
             }
         }), 403
     
@@ -117,7 +117,7 @@ def update_existing_accounts(account_id: str):
         account = update_account(account_id, data)
         return jsonify({
             "status": "SUCCESS",
-            "message": "account entry updated successfully.",
+            "message": "account updated successfully.",
             "account": account
         }), 200
     except ValueError as e:
@@ -140,8 +140,8 @@ def update_existing_accounts(account_id: str):
 
 """
 DELETE /api/accounts/v1/<account_id>
-:param account_id: The ID of the account entry to delete
-:return: A dictionary representation of the deleted account entry
+:param account_id: The ID of the account to delete
+:return: A dictionary representation of the deleted account
 """
 @account_controller.route("/<account_id>", methods=["DELETE"])
 @jwt_required()
@@ -153,7 +153,7 @@ def delete_existing_accounts(account_id: str):
             "status": "ERROR",
             "error": {
                 "code": "UNAUTHORIZED",
-                "message": "User does not have permission to delete this account entry."
+                "message": "User does not have permission to delete this account."
             }
         }), 403
     
@@ -161,7 +161,7 @@ def delete_existing_accounts(account_id: str):
         account = delete_account(account_id)
         return jsonify({
             "status": "SUCCESS",
-            "message": "account entry deleted successfully.",
+            "message": "account deleted successfully.",
             "account": account
         }), 200
     except ValueError as e:

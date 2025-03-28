@@ -95,7 +95,6 @@ def update_user_info():
         
     try:
         user = update_user(user_id, data)
-        user = get_user_by_id(user_id)
         return jsonify({
             "status": "SUCCESS",
             "message": "User information successfully updated.",

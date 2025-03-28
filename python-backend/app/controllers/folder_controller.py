@@ -55,7 +55,7 @@ Creates a new folder entry for a user
 """
 @folder_controller.route("/", methods=["POST"])
 @jwt_required()
-def create_folder_entry():
+def create_new_folder():
     user_id = get_jwt_identity()
     data = request.get_json()
 
@@ -95,7 +95,7 @@ Updates an existing folder entry for a user
 """
 @folder_controller.route("/<folder_id>", methods=["PUT"])
 @jwt_required()
-def update_folder_entry(folder_id):
+def update_existing_folder(folder_id):
     user_id = get_jwt_identity()
     data = request.get_json()
 
@@ -135,7 +135,7 @@ Deletes an existing folder entry for a user
 """
 @folder_controller.route("/<folder_id>", methods=["DELETE"])
 @jwt_required()
-def delete_folder_entry(folder_id):
+def delete_existing_folder(folder_id):
     user_id = get_jwt_identity()
 
     if get_folder_by_id(folder_id)["user_id"] != user_id:
