@@ -2,7 +2,7 @@ import uuid
 import datetime
 from app.database import db
 
-class Password(db.Model):
+class Account(db.Model):
     id = db.Column(db.String(36), primary_key=True, unique=True, default=lambda: str(uuid.uuid4()))
     user_id = db.Column(db.String(36), db.ForeignKey("user.id"), nullable=False)
     username = db.Column(db.String(120), nullable=False)

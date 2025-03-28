@@ -1,34 +1,34 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from app.services.password_service import (
-    get_password_by_id,
-    get_password_by_user_id,
-    create_password,
-    update_password,
-    delete_password
+from app.services.account_service import (
+    get_account_by_id,
+    get_accounts_by_user_id,
+    create_account,
+    update_account,
+    delete_account
 )
 
-password_controller = Blueprint("passwords", __name__)
+account_controller = Blueprint("account", __name__)
 
 
 """
-GET /api/passwords/v1
+GET /api/accounts/v1
 
-Returns all passwords for a given user
-:return: A list of dictionary representations of the password entries
+Returns all accounts for a given user
+:return: A list of dictionary representations of the account entries
 """
-@password_controller.route("/", methods=["GET"])
+@account_controller.route("/", methods=["GET"])
 @jwt_required()
-def get_user_passwords():
+def get_user_accounts():
     user_id = get_jwt_identity()
 
     try:
-        passwords = get_password_by_user_id(user_id)
+        accounts = get_accounts_by_user_id(user_id)
         return jsonify({
             "status": "SUCCESS",
-            "message": "Passwords retrieved successfully.",
-            "passwords": passwords
+            "message": "accounts retrieved successfully.",
+            "accounts": accounts
         }), 200
     except ValueError as e:
         return jsonify({
@@ -49,29 +49,29 @@ def get_user_passwords():
 
 
 """
-POST /api/passwords/v1
+POST /api/accounts/v1
 
-Creates a new password entry for a user
-:return: A dictionary representation of the newly created password entry
+Creates a new account entry for a user
+:return: A dictionary representation of the newly created account entry
 """
-@password_controller.route("/", methods=["POST"])
+@account_controller.route("/", methods=["POST"])
 @jwt_required()
-def create_password_entry():
+def create_account_entry():
     user_id = get_jwt_identity()
     data = request.get_json()
     try:
-        password = create_password(
+        account = create_account(
             user_id=user_id, 
             username=data.get("username"), 
-            password=data.get("password"),
+            account=data.get("account"),
             url=data.get("url"),
             favicon=data.get("favicon"),
             folder_id=data.get("folder_id")
         )
         return jsonify({
             "status": "SUCCESS",
-            "message": "Password entry created successfully.",
-            "password": password
+            "message": "account entry created successfully.",
+            "account": account
         }), 201
     except ValueError as e:
         return jsonify({
@@ -92,33 +92,33 @@ def create_password_entry():
 
 
 """
-PUT /api/passwords/v1/<password_id>
+PUT /api/accounts/v1/<account_id>
 
-Updates an existing password entry for a user
-:param password_id: The ID of the password entry to update
-:return: A dictionary representation of the updated password entry
+Updates an existing account entry for a user
+:param account_id: The ID of the account entry to update
+:return: A dictionary representation of the updated account entry
 """
-@password_controller.route("/<password_id>", methods=["PUT"])
+@account_controller.route("/<account_id>", methods=["PUT"])
 @jwt_required()
-def update_password_entry_info(password_id: str):
+def update_existing_accounts(account_id: str):
     user_id = get_jwt_identity()
     data = request.get_json()
 
-    if get_password_by_id(password_id)["user_id"] != user_id:
+    if get_account_by_id(account_id)["user_id"] != user_id:
         return jsonify({
             "status": "ERROR",
             "error": {
                 "code": "UNAUTHORIZED",
-                "message": "User does not have permission to update this password entry."
+                "message": "User does not have permission to update this account entry."
             }
         }), 403
     
     try:
-        password = update_password(password_id, data)
+        account = update_account(account_id, data)
         return jsonify({
             "status": "SUCCESS",
-            "message": "Password entry updated successfully.",
-            "password": password
+            "message": "account entry updated successfully.",
+            "account": account
         }), 200
     except ValueError as e:
         return jsonify({
@@ -139,30 +139,30 @@ def update_password_entry_info(password_id: str):
 
 
 """
-DELETE /api/passwords/v1/<password_id>
-:param password_id: The ID of the password entry to delete
-:return: A dictionary representation of the deleted password entry
+DELETE /api/accounts/v1/<account_id>
+:param account_id: The ID of the account entry to delete
+:return: A dictionary representation of the deleted account entry
 """
-@password_controller.route("/<password_id>", methods=["DELETE"])
+@account_controller.route("/<account_id>", methods=["DELETE"])
 @jwt_required()
-def delete_password_entry(password_id: str):
+def delete_existing_accounts(account_id: str):
     user_id = get_jwt_identity()
 
-    if get_password_by_id(password_id)["user_id"] != user_id:
+    if get_account_by_id(account_id)["user_id"] != user_id:
         return jsonify({
             "status": "ERROR",
             "error": {
                 "code": "UNAUTHORIZED",
-                "message": "User does not have permission to delete this password entry."
+                "message": "User does not have permission to delete this account entry."
             }
         }), 403
     
     try:
-        password = delete_password(password_id)
+        account = delete_account(account_id)
         return jsonify({
             "status": "SUCCESS",
-            "message": "Password entry deleted successfully.",
-            "password": password
+            "message": "account entry deleted successfully.",
+            "account": account
         }), 200
     except ValueError as e:
         return jsonify({
