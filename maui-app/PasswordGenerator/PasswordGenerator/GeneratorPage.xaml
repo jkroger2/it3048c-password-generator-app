@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordGenerator.GeneratorPage"
+             Title="Generator">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="darkmode.png"
+        Order="Primary"
+        Priority="1"
+        
+        Clicked="OnDarkModeClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+                    <!-- Password / Passphrase Toggle -->
+            <Frame BackgroundColor="#eeeeee" Padding="5" HasShadow="False">
+                <Grid ColumnDefinitions="*,*">
+                    <Button x:Name="PasswordButton"
+                        Text="Password" 
+                        BackgroundColor="White"
+                        TextColor="{AppThemeBinding Light=Black, Dark=Black}"
+                        Clicked="OnPasswordClicked" />
+
+                    <Button x:Name="PassphraseButton"
+                        Grid.Column="1"
+                        Text="Passphrase"
+                        BackgroundColor="White"
+                        TextColor="{AppThemeBinding Light=Black, Dark=Black}"
+                        Clicked="OnPassphraseClicked" />
+
+                </Grid>
+            </Frame>
+
+            <!-- Generated Password Box -->
+            <Entry x:Name="GeneratedOutput"
+                   Text="k89K%c$32hOv865G"
+                   IsReadOnly="True"
+                   FontSize="16" />
+
+            <!-- Password Length Slider and Label -->
+            <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                <Slider x:Name="LengthSlider"
+                        Minimum="0"
+                        Maximum="100"
+                        Value="16"
+                        ValueChanged="OnSliderValueChanged" />
+                <Label x:Name="LengthLabel"
+                       Text="16"
+                       Grid.Column="1"
+                       Margin="10,0"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+
+            <!-- Toggles -->
+            <HorizontalStackLayout>
+                <Label Text="Uppercase" VerticalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <Switch IsToggled="True" HorizontalOptions="EndAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Lowercase" VerticalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <Switch IsToggled="True" HorizontalOptions="EndAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Numbers" VerticalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <Switch IsToggled="True" HorizontalOptions="EndAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Special Characters" VerticalOptions="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <Switch IsToggled="True" HorizontalOptions="EndAndExpand"/>
+            </HorizontalStackLayout>
+
+            <!-- Generate Button -->
+            <Button Text="Generate"
+                    FontAttributes="Bold"
+                    BackgroundColor="MediumPurple"
+                    TextColor="{AppThemeBinding Light=White, Dark=White}"
+                    CornerRadius="8"
+                    Clicked="OnGenerateClicked"
+                    HorizontalOptions="Center"
+                    Padding="10,5"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
