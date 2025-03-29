@@ -34,12 +34,10 @@ Creates a new folder in the database
 :param data: A dictionary containing the folder data
 :return: A dictionary representation of the newly created folder
 """
-def create_folder(data: Dict):
+def create_folder(user_id: str, name: str):
     folder = Folder(
-        user_id=data["user_id"],
-        name=data["name"],
-        created_at=data["created_at"],
-        updated_at=data["updated_at"]
+        user_id=user_id,
+        name=name,
     )
     db.session.add(folder)
     db.session.commit()

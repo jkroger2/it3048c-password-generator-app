@@ -11,8 +11,11 @@ Authenticates a user by checking their credentials against the database
 :return: A dictionary containing the user"s access token and user information
 """
 def authenticate_user(data: Dict):
-    user = User.query.filter_by(email=data["email"]).first()
-    if not user or not user.check_password(data["password"]):
+    email = data["email"]
+    password = data["password"]
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not user.check_password(password):
         raise ValueError("Invalid credentials.")
     access_token = create_access_token(identity=user.id)
     return {"access_token": access_token, "user": user.to_dict()}
@@ -36,11 +39,17 @@ Creates a new user in the database
 :return: A dictionary representation of the newly created user
 """
 def create_user(data: Dict):
-    if User.query.filter_by(email=data["email"]).first():
-        raise ValueError("User already exists.")
+    email = data["email"]
+    password = data["password"]
+
+    if User.query.filter_by(email=email).first():
+        raise ValueError(f"User with email {email} already exists.")
+    
+    if not email or not password:
+        raise KeyError("'email' and 'password' fields are required.")
     
     user = User(email=data["email"])
-    user.set_password(data["password"])
+    user.set_password(password)
     db.session.add(user)
     db.session.commit()
     return user.to_dict()

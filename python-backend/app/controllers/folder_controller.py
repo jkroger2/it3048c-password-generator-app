@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services.folder_service import (
     get_folder_by_id,
     get_folders_by_user_id,
@@ -99,10 +99,16 @@ def update_existing_folder(folder_id):
     user_id = get_jwt_identity()
     data = request.get_json()
 
-    if get_folder_by_id(folder_id)["user_id"] != user_id:
-        return jsonify({"error": "Folder not found"}), 404
-    
     try:
+        if get_folder_by_id(folder_id)["user_id"] != user_id:
+            return jsonify({
+                "status": "ERROR",
+                "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "User does not have permission to update this folder."
+                }
+            }), 403
+
         folder = update_folder(folder_id, data)
         return jsonify({
             "status": "SUCCESS",
@@ -138,10 +144,16 @@ Deletes an existing folder entry for a user
 def delete_existing_folder(folder_id):
     user_id = get_jwt_identity()
 
-    if get_folder_by_id(folder_id)["user_id"] != user_id:
-        return jsonify({"error": "Unauthorized"}), 403
-    
     try:
+        if get_folder_by_id(folder_id)["user_id"] != user_id:
+            return jsonify({
+                "status": "ERROR",
+                "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "User does not have permission to delete this folder."
+                }
+            }), 403
+    
         folder = delete_folder(folder_id)
         return jsonify({
             "status": "SUCCESS",

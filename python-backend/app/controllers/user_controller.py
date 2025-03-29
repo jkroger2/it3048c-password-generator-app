@@ -71,6 +71,22 @@ def create_new_user():
                 "created_at": user["created_at"],
             }
         }), 201
+    except ValueError as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "USER_ALREADY_EXISTS",
+                "message": str(e)
+            }
+        }), 400
+    except KeyError as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INVALID_REQUEST",
+                "message": f"Missing required field: {str(e)}"
+            }
+        }), 400
     except Exception as e:
         return jsonify({
             "status": "ERROR",

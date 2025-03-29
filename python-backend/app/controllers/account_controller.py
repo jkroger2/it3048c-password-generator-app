@@ -27,7 +27,7 @@ def get_user_accounts():
         accounts = get_accounts_by_user_id(user_id)
         return jsonify({
             "status": "SUCCESS",
-            "message": "accounts retrieved successfully.",
+            "message": "Accounts retrieved successfully.",
             "accounts": accounts
         }), 200
     except ValueError as e:
@@ -63,14 +63,14 @@ def create_new_account():
         account = create_account(
             user_id=user_id, 
             username=data.get("username"), 
-            account=data.get("account"),
+            password=data.get("password"),
             url=data.get("url"),
             favicon=data.get("favicon"),
             folder_id=data.get("folder_id")
         )
         return jsonify({
             "status": "SUCCESS",
-            "message": "account created successfully.",
+            "message": "Account created successfully.",
             "account": account
         }), 201
     except ValueError as e:
@@ -104,16 +104,16 @@ def update_existing_accounts(account_id: str):
     user_id = get_jwt_identity()
     data = request.get_json()
 
-    if get_account_by_id(account_id)["user_id"] != user_id:
-        return jsonify({
-            "status": "ERROR",
-            "error": {
-                "code": "UNAUTHORIZED",
-                "message": "User does not have permission to update this account."
-            }
-        }), 403
-    
     try:
+        if get_account_by_id(account_id)["user_id"] != user_id:
+            return jsonify({
+                "status": "ERROR",
+                "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "User does not have permission to update this account."
+                }
+            }), 403
+    
         account = update_account(account_id, data)
         return jsonify({
             "status": "SUCCESS",
@@ -148,20 +148,19 @@ DELETE /api/accounts/v1/<account_id>
 def delete_existing_accounts(account_id: str):
     user_id = get_jwt_identity()
 
-    if get_account_by_id(account_id)["user_id"] != user_id:
-        return jsonify({
-            "status": "ERROR",
-            "error": {
-                "code": "UNAUTHORIZED",
-                "message": "User does not have permission to delete this account."
-            }
-        }), 403
-    
     try:
+        if get_account_by_id(account_id)["user_id"] != user_id:
+            return jsonify({
+                "status": "ERROR",
+                "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "User does not have permission to delete this account."
+                }
+            }), 403
         account = delete_account(account_id)
         return jsonify({
             "status": "SUCCESS",
-            "message": "account deleted successfully.",
+            "message": "Account deleted successfully.",
             "account": account
         }), 200
     except ValueError as e:

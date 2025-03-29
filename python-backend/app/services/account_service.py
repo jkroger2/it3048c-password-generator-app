@@ -12,7 +12,7 @@ Returns an account from the database for a given account ID
 def get_account_by_id(account_id: str):
     account = Account.query.get(account_id)
     if not account:
-        raise ValueError("account not found.")
+        raise ValueError(f"No account found for ID {account_id}.")
     
     return account.to_dict()
 
@@ -35,16 +35,23 @@ Creates a new account in the database
 :param data: A dictionary containing the account data
 :return: A dictionary representation of the newly created account 
 """
-def create_account(data: Dict):
+def create_account(
+        user_id: str,
+        username: str,
+        password: str,
+        url: str = None,
+        favicon: str = None,
+        folder_id: str = None
+):
     account = Account(
-        user_id=data["user_id"],
-        username=data["username"],
-        account=data["account"],
-        folder_id=data["folder_id"],
+        user_id=user_id,
+        username=username,
+        password=password,
+        folder_id=folder_id,
     )
 
-    if "url" in data:
-        account.set_url(data["url"])
+    if url:
+        account.set_url(url)
         account.set_favicon()
 
     db.session.add(account)
@@ -61,12 +68,12 @@ Updates an existing account in the database
 def update_account(account_id: str, data: Dict):
     account = Account.query.get(account_id)
     if not account:
-        raise ValueError(f"No account found with ID {account_id}.")
+        raise ValueError(f"No account found for ID {account_id}.")
 
     for key, value in data.items():
         setattr(account, key, value)
 
-        if "url" in data.items:
+        if "url" in data.items():
             account.set_favicon()
             
     db.session.commit()
@@ -83,7 +90,7 @@ Deletes an account from the database
 def delete_account(account_id: str):
     account = Account.query.get(account_id)
     if not account:
-        raise ValueError(f"No account not found with ID {account_id}.")
+        raise ValueError(f"No account not found for ID {account_id}.")
 
     db.session.delete(account)
     db.session.commit()
