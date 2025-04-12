@@ -66,9 +66,9 @@ def create_new_user():
             "status": "SUCCESS",
             "message": "User successfully registered.",
             "user": {
-                "id": user["id"],
                 "email": user["email"],
                 "created_at": user["created_at"],
+                "updated_at": user["updated_at"]
             }
         }), 201
     except ValueError as e:
