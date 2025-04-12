@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Maui.Controls;
+using PasswordGenerator.Pages;
 
 namespace PasswordGenerator
 {
@@ -8,6 +9,8 @@ namespace PasswordGenerator
         public AppShell()
         {
             InitializeComponent();
+
+            Routing .RegisterRoute(nameof(VaultPage), typeof(VaultPage));
 
             Routing.RegisterRoute(nameof(EditItemPage), typeof(EditItemPage));
 

@@ -3,7 +3,7 @@
     x:Class="PasswordGenerator.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:PasswordGenerator"
+    xmlns:pages="clr-namespace:PasswordGenerator.Pages"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="White"
     Shell.TabBarForegroundColor="Black"

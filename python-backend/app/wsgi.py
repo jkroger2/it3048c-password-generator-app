@@ -1,4 +1,5 @@
 import os
+import time
 import urllib.parse as urlparse
 from dotenv import load_dotenv
 from flask import Flask
@@ -57,11 +58,8 @@ def create_app():
 
     print("Connecting to DB: " + DATABASE_URL)
     with app.app_context():
-        # Drop and recreate tables if in testing mode
-        if os.getenv("FLASK_ENV") == "development   ":
-            print("Dropping and recreating all tables for testing...")
-            db.drop_all()
         db.create_all()
+ 
     return app
 
 

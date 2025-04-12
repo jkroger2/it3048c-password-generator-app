@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordGenerator.Pages.VaultPage"
+             Title="Vault">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="plus.png"
+                 Priority="0"
+                 Order="Primary"
+                 Clicked="OnAddPasswordClicked" />
+        <ToolbarItem IconImageSource="darkmode.png"
+             Order="Primary"
+             Priority="1"
+             Clicked="OnDarkModeClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowSpacing="20" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Entry Placeholder="Search" Grid.Row="0" />
+
+
+        <Label Text="Recently Used" FontAttributes="Bold" Grid.Row="1" Margin="0,10,0,0"/>
+
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Spacing="10">
+
+                
+                <!-- Tappable Account Card -->
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAccountTapped" />
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout>
+                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                        <VerticalStackLayout Padding="10,0,0,0">
+                            <Label Text="Account Name" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
+                            <Label Text="user@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+

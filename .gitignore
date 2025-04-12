@@ -179,3 +179,7 @@ cython_debug/
 .vs/
 bin/
 obj/
+
+
+# SQL
+mysql

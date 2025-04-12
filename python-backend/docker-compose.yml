@@ -14,30 +14,30 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     networks:
-      - python_backend
+      - password-app-backend
 
-  password-app-backend:
+  password-app-python-api:
     build: .
     restart: always
     depends_on:
       - password-app-db
     environment:
-      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_HOST: password-app-db
       DATABASE: ${DATABASE}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      JWT_SECERET_KEY: ${JWT_SECRET_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     ports:
       - "5000:5000"
     volumes:
-      - .:/app
-    command: ["python", "wsgi.py"]
+      - .:/usr/src
+    command: ["python", "app/wsgi.py"]
     networks:
-      - python_backend
+      - password-app-backend
 
 volumes:
   mysql:
 
 networks:
-  python_backend:
+  password-app-backend:
     driver: bridge
