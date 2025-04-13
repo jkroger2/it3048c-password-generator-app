@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Maui.Controls;
-using PasswordGenerator.Pages;
+using PasswordGenerator.Views;
 
 namespace PasswordGenerator
 {
@@ -10,11 +10,15 @@ namespace PasswordGenerator
         {
             InitializeComponent();
 
-            Routing .RegisterRoute(nameof(VaultPage), typeof(VaultPage));
+            Routing.RegisterRoute(nameof(Login), typeof(Login));
 
-            Routing.RegisterRoute(nameof(EditItemPage), typeof(EditItemPage));
+            Routing.RegisterRoute(nameof(Register), typeof(Register));
 
-            Routing.RegisterRoute(nameof(AddPasswordPage), typeof(AddPasswordPage));
+            Routing .RegisterRoute(nameof(Vault), typeof(Vault));
+
+            Routing.RegisterRoute(nameof(AddAccount), typeof(AddAccount));
+
+            Routing.RegisterRoute(nameof(EditAccount), typeof(EditAccount));
 
         }
 

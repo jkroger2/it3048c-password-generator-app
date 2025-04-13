@@ -1,11 +1,11 @@
 using System;
 using Microsoft.Maui.Controls;
 
-namespace PasswordGenerator.Pages
+namespace PasswordGenerator.Views
 {
-    public partial class EditItemPage : ContentPage
+    public partial class EditAccount : ContentPage
     {
-        public EditItemPage()
+        public EditAccount()
         {
             InitializeComponent();
         }

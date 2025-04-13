@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PasswordGenerator.Pages.RegisterPage"
+             x:Class="PasswordGenerator.Views.Register"
              BackgroundColor="White">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
         <Label Text="Register" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" />
 
-        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" BackgroundColor="#F0F0F0" />
-        <Entry x:Name="MasterPasswordEntry" Placeholder="Master Password" IsPassword="True" BackgroundColor="#F0F0F0" />
-        <Entry x:Name="ConfirmMasterPasswordEntry" Placeholder="Confirm Master Password" IsPassword="True" BackgroundColor="#F0F0F0" />
+        <Entry Text="{Binding Email}" 
+               Placeholder="Email" 
+               Keyboard="Email" 
+               BackgroundColor="#F0F0F0" />
+        <Entry Text="{Binding MasterPassword}" 
+               Placeholder="Master Password" 
+               IsPassword="True" 
+               BackgroundColor="#F0F0F0" />
+        <Entry Text="{Binding ConfirmMasterPassword}" 
+               Placeholder="Confirm Master Password" 
+               IsPassword="True" 
+               BackgroundColor="#F0F0F0" />
 
         <Button Text="Register"
                 BackgroundColor="#5A4FCF"

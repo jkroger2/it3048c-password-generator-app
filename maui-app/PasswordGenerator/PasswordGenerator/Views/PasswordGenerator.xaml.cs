@@ -1,13 +1,13 @@
 using System;
 using Microsoft.Maui.Controls;
 
-namespace PasswordGenerator.Pages
+namespace PasswordGenerator.Views
 {
-    public partial class GeneratorPage : ContentPage
+    public partial class PasswordGenerator : ContentPage
     {
         private bool isPasswordMode = true;
 
-        public GeneratorPage()
+        public PasswordGenerator()
         {
             InitializeComponent();
             UpdateButtonStyles();

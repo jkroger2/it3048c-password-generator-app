@@ -1,10 +1,10 @@
 using Microsoft.Maui.Controls;
 
-namespace PasswordGenerator.Pages
+namespace PasswordGenerator.Views
 {
-    public partial class AddPasswordPage : ContentPage
+    public partial class AddAccount : ContentPage
     {
-        public AddPasswordPage()
+        public AddAccount()
         {
             InitializeComponent();
         }

@@ -3,7 +3,7 @@
     x:Class="PasswordGenerator.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:PasswordGenerator.Pages"
+    xmlns:pages="clr-namespace:PasswordGenerator.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="White"
     Shell.TabBarForegroundColor="Black"
@@ -14,16 +14,16 @@
         <ShellContent
             Title="Vault"
             Icon="lock.png"
-            ContentTemplate="{DataTemplate pages:VaultPage}" />
+            ContentTemplate="{DataTemplate pages:Vault}" />
 
         <ShellContent
             Title="Generator"
             Icon="refresh.png"
-            ContentTemplate="{DataTemplate pages:GeneratorPage}" />
+            ContentTemplate="{DataTemplate pages:PasswordGenerator}" />
 
         <ShellContent
             Title="Settings"
             Icon="settings.png"
-            ContentTemplate="{DataTemplate pages:SettingsPage}" />
+            ContentTemplate="{DataTemplate pages:Settings}" />
     </TabBar>
 </Shell>

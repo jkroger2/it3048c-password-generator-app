@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Http;
 
+using PasswordGenerator.Models.ViewModels;
+using PasswordGenerator.Views;
+using PasswordGenerator.Services;
 
 namespace PasswordGenerator
 {
@@ -18,7 +21,30 @@ namespace PasswordGenerator
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddHttpClient<Services.UserService>();
+            /* DEPENDENCY INJECTION */
+
+            // Register Services
+            builder.Services.AddHttpClient<UserService>();
+            builder.Services.AddHttpClient<AccountService>();
+            builder.Services.AddHttpClient<FolderService>();
+
+            builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<AccountService>();
+            builder.Services.AddSingleton<FolderService>();
+            builder.Services.AddSingleton<AppState>();
+
+            // Register ViewModels
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<VaultViewModel>();
+
+            // Register Pages
+            builder.Services.AddTransient<Login>();
+            builder.Services.AddTransient<Register>();
+            builder.Services.AddTransient<Vault>();
+
+
+
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PasswordGenerator.Pages.LoginPage"
+             x:Class="PasswordGenerator.Views.Login"
              BackgroundColor="White">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
         <Label Text="Login" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" />
 
-        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" BackgroundColor="#F0F0F0" />
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" BackgroundColor="#F0F0F0" />
+        <Entry Text="{Binding Email}" 
+               Placeholder="Email" 
+               Keyboard="Email" 
+               BackgroundColor="#F0F0F0" />
+        <Entry Text="{Binding Password}" 
+               Placeholder="Password" 
+               IsPassword="True" 
+               BackgroundColor="#F0F0F0" />
 
         <Button Text="Login"
                 BackgroundColor="#5A4FCF"
                 TextColor="White"
                 CornerRadius="12"
                 Clicked="OnLoginClicked" />
-
         <Button Text="Don't have an account? Register"
                 BackgroundColor="Transparent"
                 TextColor="#5A4FCF"
