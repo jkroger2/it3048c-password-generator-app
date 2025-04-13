@@ -9,17 +9,23 @@
 
             <Label Text="Add New Item" FontAttributes="Bold" FontSize="20" />
 
-            <Entry Placeholder="Name" />
-            <Entry Placeholder="Username" />
-            <Entry Placeholder="Password" IsPassword="True" />
-            <Entry Placeholder="URL" Keyboard="Url" />
+            <Entry Text="{Binding Name}" 
+                   Placeholder="Name" />
+            <Entry Text="{Binding Username}" 
+                   Placeholder="Username" />
+            <Entry Text="{Binding Password}" 
+                   Placeholder="Password" 
+                   IsPassword="True" />
+            <Entry Text="{Binding Url}" 
+                   Placeholder="URL" 
+                   Keyboard="Url" />
 
             <Button Text="Save"
-            BackgroundColor="MediumPurple"
-            TextColor="White"
-            FontAttributes="Bold"
-            CornerRadius="8"
-            Clicked="OnSaveClicked" />
+                    BackgroundColor="MediumPurple"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    Clicked="OnSaveClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

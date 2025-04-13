@@ -16,7 +16,9 @@ namespace PasswordGenerator.Services
 
         public async Task<List<Account>> GetUserAccounts(User user)
         {
-            string url = "http://10.0.2.2:5000/api/accounts/v1";
+            List<Account> accounts = new List<Account>();
+
+            string url = "http://10.0.2.2:5000/api/accounts/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var response = await _httpClient.GetAsync(url);
@@ -27,7 +29,7 @@ namespace PasswordGenerator.Services
             if (response.IsSuccessStatusCode)
             {
                 var accountsList = root.GetProperty("accounts");
-                List<Account> accounts = new List<Account>();
+               
 
                 foreach (var acc in accountsList.EnumerateArray())
                 {
@@ -54,6 +56,10 @@ namespace PasswordGenerator.Services
 
                 return accounts;
             }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return accounts;
+            }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 throw new UnauthorizedAccessException("Invalid token.");
@@ -66,7 +72,7 @@ namespace PasswordGenerator.Services
 
         public async Task<Account> CreateAccount(User user, string name, string username, string password, string url, string folderId)
         {
-            string requestUrl = "http://10.0.2.2:5000/api/accounts/v1";
+            string requestUrl = "http://10.0.2.2:5000/api/accounts/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var requestBody = new

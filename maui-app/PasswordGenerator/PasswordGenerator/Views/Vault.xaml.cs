@@ -28,7 +28,8 @@ namespace PasswordGenerator.Views
 
         private async void OnAddPasswordClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddAccount());
+            AddAccount addAccountPage = ((App)Application.Current).Services.GetService<AddAccount>();
+            await Navigation.PushAsync(addAccountPage);
         }
 
         private void OnDarkModeClicked(object sender, EventArgs e)

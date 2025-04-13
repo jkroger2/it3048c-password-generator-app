@@ -37,11 +37,13 @@ namespace PasswordGenerator
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<VaultViewModel>();
+            builder.Services.AddTransient<AddAccountViewModel>();
 
             // Register Pages
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<Vault>();
+            builder.Services.AddTransient<AddAccount>();
 
 
 

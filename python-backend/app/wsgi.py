@@ -1,8 +1,8 @@
 import os
-import time
+import logging
 import urllib.parse as urlparse
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, request
 from flask_jwt_extended import JWTManager
 
 from app.controllers.user_controller import user_controller
@@ -30,6 +30,19 @@ def create_app():
     # Initialize DB and JWT manager
     db.init_app(app)
     jwt = JWTManager(app)
+    
+
+    # Set up logging
+    logging.basicConfig(level=logging.DEBUG)
+    
+    @app.before_request
+    def log_request_info():
+        logging.debug(f"Request method: {request.method}")
+        logging.debug(f"Request URL: {request.url}")
+        logging.debug(f"Request headers: {request.headers}")
+        # If the request has a body (for POST/PUT requests)
+        if request.data:
+            logging.debug(f"Request body: {request.data.decode('utf-8')}")
 
     @jwt.unauthorized_loader
     def unauthorized_callback(callback):

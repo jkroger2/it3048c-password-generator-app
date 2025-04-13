@@ -32,6 +32,7 @@ namespace PasswordGenerator.Models.ViewModels
                 IsLoading = true;
 
                 User user = _appState.GetUser();
+
                 var accountList = await _accountService.GetUserAccounts(user);
 
                 Accounts = new ObservableCollection<Account>(accountList);

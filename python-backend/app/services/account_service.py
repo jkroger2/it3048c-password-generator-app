@@ -37,14 +37,15 @@ Creates a new account in the database
 """
 def create_account(
         user_id: str,
+        name: str,
         username: str,
         password: str,
         url: str = None,
-        favicon: str = None,
         folder_id: str = None
 ):
     account = Account(
         user_id=user_id,
+        name=name,
         username=username,
         password=password,
         folder_id=folder_id,

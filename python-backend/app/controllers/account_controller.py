@@ -62,10 +62,10 @@ def create_new_account():
     try:
         account = create_account(
             user_id=user_id, 
+            name=data.get("name"),
             username=data.get("username"), 
             password=data.get("password"),
             url=data.get("url"),
-            favicon=data.get("favicon"),
             folder_id=data.get("folder_id")
         )
         return jsonify({
@@ -82,6 +82,7 @@ def create_new_account():
             }
         }), 400
     except Exception as e:
+        print(e)
         return jsonify({
             "status": "ERROR",
             "error": {

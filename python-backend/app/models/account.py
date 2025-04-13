@@ -24,12 +24,13 @@ class Account(db.Model):
 
     def set_url(self, new_url):
         self.url = new_url
-        self.favicon = self.get_favicon()
+        self.favicon = self.set_favicon()
     
     def to_dict(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "name": self.name,
             "username": self.username,
             "password": self.password,
             "url": self.url,
