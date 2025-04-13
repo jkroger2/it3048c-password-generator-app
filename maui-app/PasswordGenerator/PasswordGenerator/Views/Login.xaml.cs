@@ -24,8 +24,8 @@ namespace PasswordGenerator.Views
                     return;
                 }
 
-                Vault vaultPage = ((App)Application.Current).Services.GetService<Vault>();
-                await Navigation.PushAsync(vaultPage);
+                AppShell shell = ((App)Application.Current).Services.GetService<AppShell>();
+                ((App)Application.Current).MainPage = shell;
             }
             catch (UnauthorizedAccessException ex)
             {

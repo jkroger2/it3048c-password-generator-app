@@ -38,7 +38,7 @@
                             </Frame.GestureRecognizers>
 
                             <HorizontalStackLayout>
-                                <Image Source="{Binding Favicon}" HeightRequest="20" WidthRequest="20"/>
+                                <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
                                 <VerticalStackLayout Padding="10,0,0,0">
                                     <Label Text="{Binding Name}" 
                            FontSize="16" 

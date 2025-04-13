@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from flask import Flask, request
 from flask_jwt_extended import JWTManager
 
+from app.controllers.password_generator_controller import password_generator_controller
 from app.controllers.user_controller import user_controller
 from app.controllers.account_controller import account_controller
 from app.controllers.folder_controller import folder_controller
@@ -65,6 +66,7 @@ def create_app():
     
     # Register API controllers
     print("Registering API controllers")
+    app.register_blueprint(password_generator_controller, url_prefix="/api/password/v1/generate")
     app.register_blueprint(user_controller, url_prefix="/api/users/v1")
     app.register_blueprint(account_controller, url_prefix="/api/accounts/v1")
     app.register_blueprint(folder_controller, url_prefix="/api/folders/v1")

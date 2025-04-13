@@ -27,23 +27,29 @@ namespace PasswordGenerator
             builder.Services.AddHttpClient<UserService>();
             builder.Services.AddHttpClient<AccountService>();
             builder.Services.AddHttpClient<FolderService>();
+            builder.Services.AddHttpClient<PasswordGeneratorService>();
 
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<AccountService>();
             builder.Services.AddSingleton<FolderService>();
+            builder.Services.AddSingleton<PasswordGeneratorService>();
             builder.Services.AddSingleton<AppState>();
+
+            builder.Services.AddSingleton<AppShell>();
 
             // Register ViewModels
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<VaultViewModel>();
             builder.Services.AddTransient<AddAccountViewModel>();
+            builder.Services.AddTransient<PasswordGeneratorViewModel>();
 
             // Register Pages
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<Vault>();
             builder.Services.AddTransient<AddAccount>();
+            builder.Services.AddTransient<Views.PasswordGenerator>();
 
 
 

@@ -9,7 +9,6 @@
 
         <Entry Text="{Binding Email}" 
                Placeholder="Email" 
-               Keyboard="Email" 
                BackgroundColor="#F0F0F0" />
         <Entry Text="{Binding Password}" 
                Placeholder="Password" 

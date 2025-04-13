@@ -1,45 +1,25 @@
 using System;
 using Microsoft.Maui.Controls;
 
+using PasswordGenerator.Models;
+using PasswordGenerator.Models.ViewModels;
+
 namespace PasswordGenerator.Views
 {
     public partial class PasswordGenerator : ContentPage
     {
-        private bool isPasswordMode = true;
+        private readonly PasswordGeneratorViewModel _viewModel;
 
-        public PasswordGenerator()
+
+        public PasswordGenerator(PasswordGeneratorViewModel viewModel)
         {
             InitializeComponent();
-            UpdateButtonStyles();
+            BindingContext = _viewModel = viewModel;
         }
 
-        private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
+        private void OnGenerateClicked(object sender, EventArgs e)
         {
-            if (LengthLabel != null)
-                LengthLabel.Text = ((int)e.NewValue).ToString();
-        }
-
-        private void OnPasswordClicked(object sender, EventArgs e)
-        {
-            isPasswordMode = true;
-            GeneratedOutput.Text = "GeneratedPassword123!";
-            UpdateButtonStyles();
-        }
-
-        private void OnPassphraseClicked(object sender, EventArgs e)
-        {
-            isPasswordMode = false;
-            GeneratedOutput.Text = "purple-ocean-cactus";
-            UpdateButtonStyles();
-        }
-
-        private void UpdateButtonStyles()
-        {
-            if (PasswordButton != null && PassphraseButton != null)
-            {
-                PasswordButton.BackgroundColor = isPasswordMode ? Colors.LightGray : Colors.White;
-                PassphraseButton.BackgroundColor = !isPasswordMode ? Colors.LightGray : Colors.White;
-            }
+            _viewModel.GeneratePasswordAsync();
         }
 
         private void OnDarkModeClicked(object sender, EventArgs e)
@@ -47,13 +27,6 @@ namespace PasswordGenerator.Views
             var current = Application.Current.UserAppTheme;
             Application.Current.UserAppTheme = current == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
         }
-
-        private void OnGenerateClicked(object sender, EventArgs e)
-        {
-            string generated = "";
-            GeneratedOutput.Text = generated;
-        }
-
     }
 
 

@@ -37,7 +37,6 @@ namespace PasswordGenerator.Views
             var current = Application.Current.UserAppTheme;
             Application.Current.UserAppTheme = current == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
         }
-
     }
 }
 

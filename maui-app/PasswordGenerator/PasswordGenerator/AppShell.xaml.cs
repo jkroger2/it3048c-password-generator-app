@@ -14,7 +14,9 @@ namespace PasswordGenerator
 
             Routing.RegisterRoute(nameof(Register), typeof(Register));
 
-            Routing .RegisterRoute(nameof(Vault), typeof(Vault));
+            Routing.RegisterRoute(nameof(Vault), typeof(Vault));
+
+            Routing.RegisterRoute(nameof(Views.PasswordGenerator), typeof(Views.PasswordGenerator));
 
             Routing.RegisterRoute(nameof(AddAccount), typeof(AddAccount));
 

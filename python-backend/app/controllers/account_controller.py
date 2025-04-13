@@ -82,7 +82,6 @@ def create_new_account():
             }
         }), 400
     except Exception as e:
-        print(e)
         return jsonify({
             "status": "ERROR",
             "error": {
