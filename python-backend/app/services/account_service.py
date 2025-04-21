@@ -22,8 +22,12 @@ Returns all accounts from the database for a given user ID
 :param user_id: The ID of the user to retrieve account for
 :return: A list of dictionary representations of the accounts
 """
-def get_accounts_by_user_id(user_id: str):
-    accounts = Account.query.filter_by(user_id=user_id).all()
+def get_accounts_by_user_id(user_id: str, folder_id: str = None):
+    if folder_id:
+        accounts = Account.query.filter_by(user_id=user_id, folder_id=folder_id).all()
+    else:
+        accounts = Account.query.filter_by(user_id=user_id).all()
+        
     if not accounts:
         raise ValueError(f"No accounts found for user ID {user_id}.")
     

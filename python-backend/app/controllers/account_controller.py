@@ -47,6 +47,37 @@ def get_user_accounts():
             }
         }), 500
 
+"""
+GET /api/accounts/v1/<folder_id>
+"""
+@account_controller.route("/<folder_id>", methods=["GET"])
+@jwt_required()
+def get_account_by_folder_id(folder_id):
+    user_id = get_jwt_identity()
+    
+    try:
+        accounts = get_accounts_by_user_id(user_id, folder_id)
+        return jsonify({
+            "status": "SUCCESS",
+            "message": "Accounts retrieved successfully.",
+            "accounts": accounts
+        }), 200
+    except ValueError as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "ACCOUNTS_NOT_FOUND",
+                "message": str(e)
+            }
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "error": {
+                "code": "INTERNAL_SERVER_ERROR",
+                "message": str(e)
+            }
+        }), 500
 
 """
 POST /api/accounts/v1
