@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 using PasswordGenerator.Services;
 
@@ -22,6 +23,9 @@ namespace PasswordGenerator.Models.ViewModels
 
         [ObservableProperty]
         private int length;
+
+        [ObservableProperty]
+        private int wordCount = 4;
 
         [ObservableProperty]
         private bool numbers;
@@ -54,6 +58,7 @@ namespace PasswordGenerator.Models.ViewModels
         {
             IsPasswordMode = !IsPasswordMode;
             IsPassphraseMode = !IsPasswordMode;
+            GeneratedPassword = string.Empty;
         }
 
         [RelayCommand]
@@ -62,8 +67,14 @@ namespace PasswordGenerator.Models.ViewModels
             try
             {
                 IsLoading = true;
-                string generated = await _passwordGeneratorService.GeneratePassword(Length, Numbers, Lowercase, Uppercase, Symbols);
-                GeneratedPassword = generated;
+                if (IsPasswordMode)
+                {
+                    GeneratedPassword = await _passwordGeneratorService.GeneratePassword(Length, Numbers, Lowercase, Uppercase, Symbols);
+                }
+                else
+                {
+                    GeneratedPassword = await _passwordGeneratorService.GeneratePassphrase(WordCount, Uppercase);
+                }
             }
             catch (Exception ex)
             {
@@ -83,6 +94,5 @@ namespace PasswordGenerator.Models.ViewModels
                 await Clipboard.SetTextAsync(GeneratedPassword);
             }
         }
-
     }
 }

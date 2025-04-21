@@ -34,8 +34,7 @@ namespace PasswordGenerator.Views
 
         private void OnDarkModeClicked(object sender, EventArgs e)
         {
-            var current = Application.Current.UserAppTheme;
-            Application.Current.UserAppTheme = current == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
+            Application.Current.UserAppTheme = Application.Current.UserAppTheme == AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
         }
     }
 }

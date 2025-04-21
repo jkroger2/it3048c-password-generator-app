@@ -11,6 +11,9 @@ namespace PasswordGenerator
             InitializeComponent();
             Services = services;
 
+            var systemTheme = Current.RequestedTheme;
+            Current.UserAppTheme = systemTheme;
+
             var loginPage = Services.GetService<Login>();
             MainPage = new NavigationPage(loginPage);
         }
