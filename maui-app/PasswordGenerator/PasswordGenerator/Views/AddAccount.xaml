@@ -9,16 +9,54 @@
 
             <Label Text="Add New Item" FontAttributes="Bold" FontSize="20" />
 
-            <Entry Text="{Binding Name}" 
-                   Placeholder="Name" />
-            <Entry Text="{Binding Username}" 
-                   Placeholder="Username" />
-            <Entry Text="{Binding Password}" 
-                   Placeholder="Password" 
-                   IsPassword="True" />
-            <Entry Text="{Binding Url}" 
-                   Placeholder="URL" 
-                   Keyboard="Url" />
+            <Grid RowSpacing="2" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" FontSize="14">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Name"/>
+                            <Span Text="*" TextColor="Red"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Entry Grid.Row="1" Text="{Binding Name}" Placeholder="Name" Margin="0,0,0,10"/>
+
+                <Label Grid.Row="2" FontSize="14">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Username"/>
+                            <Span Text="*" TextColor="Red"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Entry Grid.Row="3" Text="{Binding Username}" Placeholder="Username" Margin="0,0,0,10"/>
+
+                <Label Grid.Row="4" FontSize="14">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Password"/>
+                            <Span Text="*" TextColor="Red"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Entry Grid.Row="5" Text="{Binding Password}" Placeholder="Password" IsPassword="True" Margin="0,0,0,10"/>
+
+                <Label Grid.Row="6" Text="URL" FontSize="14"/>
+                <Entry Grid.Row="7" Text="{Binding Url}" Placeholder="URL" Keyboard="Url" Margin="0,0,0,10"/>
+            </Grid>
 
             <Button Text="Save"
                     BackgroundColor="MediumPurple"

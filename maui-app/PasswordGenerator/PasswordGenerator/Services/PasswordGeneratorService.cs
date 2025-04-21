@@ -14,7 +14,7 @@ namespace PasswordGenerator.Services
 
         public async Task<string> GeneratePassword(int length, bool numbers, bool lowercase, bool uppercase, bool symbols)
         {
-            string url = "http://10.0.2.2:5000/api/password/v1/generate";
+            string url = "http://localhost:5000/api/password/v1/generate";
             var requestBody = new
             {
                 length = length,

@@ -30,8 +30,8 @@
                 <Entry Placeholder="Email Address" Keyboard="Email" />
                 <Entry Placeholder="Username" />
                 <Button Text="Update Account Info"
-                        BackgroundColor="#4CAF50"
-                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        BackgroundColor="#5A4FCF"
+                        TextColor="White"
                         CornerRadius="8" />
             </StackLayout>
 
@@ -51,8 +51,8 @@
                 <Entry Placeholder="New Password" IsPassword="True" />
                 <Entry Placeholder="Confirm New Password" IsPassword="True" />
                 <Button Text="Change Password"
-                        BackgroundColor="#4CAF50"
-                        TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                        BackgroundColor="#5A4FCF"
+                        TextColor="White"
                         CornerRadius="8" />
             </StackLayout>
 
