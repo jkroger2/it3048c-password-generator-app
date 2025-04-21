@@ -18,7 +18,7 @@ namespace PasswordGenerator.Services
         {
             List<Account> accounts = new List<Account>();
 
-            string url = "http://localhost:5000/api/accounts/v1/";
+            string url = "http://10.0.2.2:5000/api/accounts/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var response = await _httpClient.GetAsync(url);
@@ -72,7 +72,7 @@ namespace PasswordGenerator.Services
 
         public async Task<Account> CreateAccount(User user, string name, string username, string password, string url, string folderId)
         {
-            string requestUrl = "http://localhost:5000/api/accounts/v1/";
+            string requestUrl = "http://10.0.2.2:5000/api/accounts/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var requestBody = new

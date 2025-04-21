@@ -16,7 +16,7 @@ namespace PasswordGenerator.Services
 
         public async Task<User> AuthenticateUser(string email, string password)
         {
-            string url = "http://localhost:5000/api/users/v1/login";
+            string url = "http://10.0.2.2:5000/api/users/v1/login";
             var requestBody = new
             {
                 email = email,
@@ -53,7 +53,7 @@ namespace PasswordGenerator.Services
 
         public async Task RegisterUser(string email, string password)
         {
-            string url = "http://localhost:5000/api/users/v1/register";
+            string url = "http://10.0.2.2:5000/api/users/v1/register";
             var requestBody = new
             {
                 email = email,

@@ -1,43 +1,43 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  password-app-db:
-    image: mysql:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE}
-      MYSQL_USER: ${DATABASE_USER}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./mysql:/var/lib/mysql
-    networks:
-      - password-app-backend
+    password-app-db:
+        image: mysql:latest
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DATABASE}
+            MYSQL_USER: ${DATABASE_USER}
+            MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - password-app-backend
 
-  password-app-python-api:
-    build: .
-    restart: always
-    depends_on:
-      - password-app-db
-    environment:
-      DATABASE_HOST: password-app-db
-      DATABASE: ${DATABASE}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-    ports:
-      - "5000:5000"
-    volumes:
-      - .:/usr/src
-    command: ["python", "app/wsgi.py"]
-    networks:
-      - password-app-backend
+    password-app-python-api:
+        build: .
+        restart: always
+        depends_on:
+            - password-app-db
+        environment:
+            DATABASE_HOST: password-app-db
+            DATABASE: ${DATABASE}
+            DATABASE_USER: ${DATABASE_USER}
+            DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+        ports:
+            - '5000:5000'
+        volumes:
+            - .:/usr/src
+        command: ['python', 'app/wsgi.py']
+        networks:
+            - password-app-backend
 
 volumes:
-  mysql:
+    mysql:
 
 networks:
-  password-app-backend:
-    driver: bridge
+    password-app-backend:
+        driver: bridge
