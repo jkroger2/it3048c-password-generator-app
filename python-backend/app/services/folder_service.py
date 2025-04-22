@@ -29,12 +29,23 @@ def get_folders_by_user_id(user_id: str):
     return [folder.to_dict() for folder in folders]
 
 
+def get_folders_by_user_id_and_name(user_id: str, name: str):
+    folders = Folder.query.filter_by(user_id=user_id, name=name).all()
+    if not folders:
+        return None
+    
+    return [folder.to_dict() for folder in folders]
+
+
 """
 Creates a new folder in the database
 :param data: A dictionary containing the folder data
 :return: A dictionary representation of the newly created folder
 """
 def create_folder(user_id: str, name: str):
+    if get_folders_by_user_id_and_name(user_id, name):
+        raise ValueError("Folder with this name already exists.")
+    
     folder = Folder(
         user_id=user_id,
         name=name,

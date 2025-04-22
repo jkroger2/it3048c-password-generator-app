@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from app.services.password_generator_service import generate_password
+from app.services.generator_service import generate_password
 
 password_generator_controller = Blueprint("password_generator_controller", __name__)
 

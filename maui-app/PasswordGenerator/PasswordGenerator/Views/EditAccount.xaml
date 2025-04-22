@@ -9,142 +9,15 @@
 
             <Label Text="Account Information" FontAttributes="Bold" FontSize="18" />
 
-            <Entry Placeholder="Name" />
-            <Entry Placeholder="Username" />
-            <Entry Placeholder="Password" IsPassword="True" />
+            <Entry Placeholder="Name" Text="{Binding Name}" />
+            <Entry Placeholder="Username" Text="{Binding Username}" />
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+            <Entry Placeholder="URL" Text="{Binding Url}" Keyboard="Url" />
 
-            <Label Text="Folders" FontAttributes="Bold" FontSize="18" Margin="0,20,0,0"/>
-
-            <!-- Folder: Social Media -->
-            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnSocialMediaTapped" />
-                </Frame.GestureRecognizers>
-                <HorizontalStackLayout>
-                    <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
-                    <Label Text="Social Media" Padding="10,0" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                </HorizontalStackLayout>
-            </Frame>
-
-            <StackLayout x:Name="SocialMediaAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Instagram" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="insta@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Facebook" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="fb@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-            </StackLayout>
-
-            <!-- Folder: Financial -->
-            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnFinancialTapped" />
-                </Frame.GestureRecognizers>
-                <HorizontalStackLayout>
-                    <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
-                    <Label Text="Financial" Padding="10,0" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                </HorizontalStackLayout>
-            </Frame>
-
-            <StackLayout x:Name="FinancialAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Bank App" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="bank@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="PayPal" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="paypal@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-            </StackLayout>
-
-            <!-- Folder: Work -->
-            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnWorkTapped" />
-                </Frame.GestureRecognizers>
-                <HorizontalStackLayout>
-                    <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
-                    <Label Text="Work" Padding="10,0" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                </HorizontalStackLayout>
-            </Frame>
-
-            <StackLayout x:Name="WorkAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Slack" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="slack@company.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Zoom" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="zoom@company.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-            </StackLayout>
-
-
-            <!-- Folder: Entertainment -->
-            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnEntertainmentTapped" />
-                </Frame.GestureRecognizers>
-                <HorizontalStackLayout>
-                    <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
-                    <Label Text="Entertainment" Padding="10,0" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                </HorizontalStackLayout>
-            </Frame>
-
-            <StackLayout x:Name="EntertainmentAccounts" IsVisible="False" Padding="10,0,0,0" Spacing="10">
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Netflix" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="netflix@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-                <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                    <HorizontalStackLayout>
-                        <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                        <VerticalStackLayout Padding="10,0,0,0">
-                            <Label Text="Spotify" FontSize="16" TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                            <Label Text="music@email.com" FontSize="12" TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </Frame>
-            </StackLayout>
-
-
+            <Picker Title="Folder"
+                    ItemsSource="{Binding Folders}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedFolder}" />
 
             <Button Text="Save"
             BackgroundColor="MediumPurple"

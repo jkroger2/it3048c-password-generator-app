@@ -19,10 +19,23 @@ namespace PasswordGenerator.Views
         {
             base.OnAppearing();
             await _viewModel.LoadAccountsAsync();
+            await _viewModel.LoadFoldersAsync();
         }
 
-        private async void OnAccountTapped(object sender, EventArgs e)
+        private async void OnAccountTapped(object sender, TappedEventArgs e)
         {
+            if (e.Parameter is Account selectedAccount)
+            {
+                EditAccount editPage = ((App)Application.Current).Services.GetService<EditAccount>();
+
+                if (editPage != null && editPage.BindingContext is EditAccountViewModel vm)
+                {
+                    vm.LoadAccount(selectedAccount);
+                }
+
+                await Navigation.PushAsync(editPage);
+
+            }
             await Navigation.PushAsync(new EditAccount());
         }
 

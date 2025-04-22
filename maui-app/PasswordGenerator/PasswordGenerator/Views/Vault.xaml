@@ -22,36 +22,57 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Entry Placeholder="Search" Grid.Row="0" />
-
-
-        <Label Text="Recently Used" FontAttributes="Bold" Grid.Row="1" Margin="0,10,0,0"/>
 
         <ScrollView Grid.Row="2">
-            <CollectionView ItemsSource="{Binding Accounts}"
-                            SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnAccountTapped" />
-                            </Frame.GestureRecognizers>
+            <VerticalStackLayout>
+                <!-- Folders -->
+                <CollectionView ItemsSource="{Binding Folders}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAccountTapped" CommandParameter="{Binding}"/>
+                                </Frame.GestureRecognizers>
 
-                            <HorizontalStackLayout>
-                                <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
-                                <VerticalStackLayout Padding="10,0,0,0">
-                                    <Label Text="{Binding Name}" 
-                           FontSize="16" 
-                           TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
-                                    <Label Text="{Binding Username}" 
-                           FontSize="12" 
-                           TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
-                                </VerticalStackLayout>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <HorizontalStackLayout>
+                                    <Image Source="folder_icon.png" HeightRequest="20" WidthRequest="20"/>
+                                    <VerticalStackLayout Padding="10,0,0,0">
+                                        <Label Text="{Binding Name}" 
+                                FontSize="16" 
+                                TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Accounts -->
+                <CollectionView ItemsSource="{Binding Accounts}"
+                 SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="12" BackgroundColor="#eeeeee" Padding="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAccountTapped" CommandParameter="{Binding}"/>
+                                </Frame.GestureRecognizers>
+
+                                <HorizontalStackLayout>
+                                    <Image Source="key_icon.png" HeightRequest="20" WidthRequest="20"/>
+                                    <VerticalStackLayout Padding="10,0,0,0">
+                                        <Label Text="{Binding Name}" 
+                FontSize="16" 
+                TextColor="{AppThemeBinding Light=Black, Dark=Black}"/>
+                                        <Label Text="{Binding Username}" 
+                FontSize="12" 
+                TextColor="{AppThemeBinding Light=Gray, Dark=Gray}"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
         </ScrollView>
     </Grid>
 </ContentPage>

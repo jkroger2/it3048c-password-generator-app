@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from flask import Flask, request
 from flask_jwt_extended import JWTManager
 
-from app.controllers.password_generator_controller import password_generator_controller
+from app.controllers.generator_controller import password_generator_controller
 from app.controllers.user_controller import user_controller
 from app.controllers.account_controller import account_controller
 from app.controllers.folder_controller import folder_controller
@@ -32,7 +32,6 @@ def create_app():
     db.init_app(app)
     jwt = JWTManager(app)
     
-
     # Set up logging
     logging.basicConfig(level=logging.DEBUG)
     

@@ -10,10 +10,14 @@ namespace PasswordGenerator.Models.ViewModels
     public partial class VaultViewModel : ObservableObject
     {
         private readonly AccountService _accountService;
+        private readonly FolderService _folderService;
         private readonly AppState _appState;
 
         [ObservableProperty]
         private ObservableCollection<Account> accounts = new();
+
+        [ObservableProperty]
+        private ObservableCollection<Folder> folders = new();
 
         [ObservableProperty]
         private bool isLoading;
@@ -36,6 +40,25 @@ namespace PasswordGenerator.Models.ViewModels
                 var accountList = await _accountService.GetUserAccounts(user);
 
                 Accounts = new ObservableCollection<Account>(accountList);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        [RelayCommand]
+        public async Task LoadFoldersAsync()
+        {
+            try
+            {
+                IsLoading = true;
+
+                User user = _appState.GetUser();
+
+                var folderList = await _folderService.GetUserFolders(user);
+
+                Folders = new ObservableCollection<Folder>(folderList);
             }
             finally
             {

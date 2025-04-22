@@ -122,5 +122,79 @@ namespace PasswordGenerator.Services
                 throw new Exception("Error occurred when creating account.");
             }
         }
+
+        public async Task<Account> UpdateAccount(User user, string id, string name, string username, string password, string url, string folderId)
+        {
+            string requestUrl = $"http://10.0.2.2:5000/api/accounts/v1/{id}";
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
+
+            var requestBody = new
+            {
+                name = name,
+                username = username,
+                password = password,
+                url = url,
+                folder_id = folderId
+            };
+
+            var response = await _httpClient.PutAsJsonAsync(requestUrl, requestBody);
+            var responseJson = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(responseJson);
+            var root = doc.RootElement;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var acc = root.GetProperty("account");
+                var accountId = acc.GetProperty("id").GetString();
+                var accountName = acc.GetProperty("name").GetString();
+                var accountUsername = acc.GetProperty("username").GetString();
+                var accountPassword = acc.GetProperty("password").GetString();
+                var accountUrl = acc.GetProperty("url").GetString();
+                var accountFavicon = acc.GetProperty("favicon").GetString();
+                var accountFolderId = acc.GetProperty("folder_id").GetString();
+
+                Account newAccount = new Account()
+                {
+                    Id = accountId,
+                    Name = accountName,
+                    Username = accountUsername,
+                    Password = accountPassword,
+                    Url = accountUrl,
+                    Favicon = accountFavicon,
+                    FolderId = accountFolderId
+                };
+
+                return newAccount;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Invalid token.");
+            }
+            else
+            {
+                throw new Exception("Error occurred when creating account.");
+            }
+        }
+
+        public async Task DeleteAccount(User user, string id)
+        {
+            string url = $"http://10.0.2.2:5000/api/accounts/v1/{id}";
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
+
+            var response = await _httpClient.DeleteAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("Invalid token.");
+            }
+            else
+            {
+                throw new Exception("Error occurred when deleting account.");
+            }
+        }
     }
 }
