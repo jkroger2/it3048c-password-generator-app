@@ -153,7 +153,7 @@ namespace PasswordGenerator.Services
                 var accountFavicon = acc.GetProperty("favicon").GetString();
                 var accountFolderId = acc.GetProperty("folder_id").GetString();
 
-                Account newAccount = new Account()
+                Account account = new Account()
                 {
                     Id = accountId,
                     Name = accountName,
@@ -164,7 +164,7 @@ namespace PasswordGenerator.Services
                     FolderId = accountFolderId
                 };
 
-                return newAccount;
+                return account;
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {

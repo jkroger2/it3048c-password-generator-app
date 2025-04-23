@@ -28,7 +28,10 @@ namespace PasswordGenerator.Models.ViewModels
         private string favicon;
 
         [ObservableProperty]
-        private string folderId;
+        private Folder selectedFolder;
+
+        [ObservableProperty]
+        private ObservableCollection<Folder> folders = new();
 
         [ObservableProperty]
         private bool isLoading;
@@ -39,7 +42,6 @@ namespace PasswordGenerator.Models.ViewModels
             _appState = appState;
         }
 
-        [RelayCommand]
         public async Task<OperationResult> AddAccountAsync()
         {
             try
@@ -56,8 +58,19 @@ namespace PasswordGenerator.Models.ViewModels
                 }
 
                 User user = _appState.GetUser();
+                
+                string folderId;
 
-                await _accountService.CreateAccount(user, Name, Username, Password, Url, FolderId);
+                if (SelectedFolder == null)
+                {
+                    folderId = null;
+                }
+                else
+                {
+                    folderId = SelectedFolder.Id;
+                }
+                await _accountService.CreateAccount(user, Name, Username, Password, Url, folderId);
+
                 return new OperationResult
                 {
                     Success = true,

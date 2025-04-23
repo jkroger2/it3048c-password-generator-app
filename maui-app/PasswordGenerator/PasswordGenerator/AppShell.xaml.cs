@@ -10,19 +10,18 @@ namespace PasswordGenerator
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(Login), typeof(Login));
+            Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
 
-            Routing.RegisterRoute(nameof(Register), typeof(Register));
+            Routing.RegisterRoute(nameof(RegisterView), typeof(RegisterView));
 
-            Routing.RegisterRoute(nameof(Vault), typeof(Vault));
+            Routing.RegisterRoute(nameof(VaultView), typeof(VaultView));
 
-            Routing.RegisterRoute(nameof(Views.PasswordGenerator), typeof(Views.PasswordGenerator));
+            Routing.RegisterRoute(nameof(PasswordGeneratorView), typeof(PasswordGeneratorView));
 
-            Routing.RegisterRoute(nameof(AddAccount), typeof(AddAccount));
+            Routing.RegisterRoute(nameof(AddAccountView), typeof(AddAccountView));
 
-            Routing.RegisterRoute(nameof(EditAccount), typeof(EditAccount));
+            Routing.RegisterRoute(nameof(EditAccountView), typeof(EditAccountView));
 
         }
-
     }
 }

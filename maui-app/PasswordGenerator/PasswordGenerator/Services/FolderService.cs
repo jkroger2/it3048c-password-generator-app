@@ -18,7 +18,7 @@ namespace PasswordGenerator.Services
         {
             List<Folder> folders = new List<Folder>();
 
-            string url = "http://10.0.2.2:5000/api/folders/v1";
+            string url = "http://10.0.2.2:5000/api/folders/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var response = await _httpClient.GetAsync(url);
@@ -58,7 +58,7 @@ namespace PasswordGenerator.Services
 
         public async Task<Folder> CreateFolder(User user, string name)
         {
-            string url = "http://10.0.2.2:5000/api/folders/v1";
+            string url = "http://10.0.2.2:5000/api/folders/v1/";
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.Token);
 
             var requestBody = new
@@ -154,4 +154,5 @@ namespace PasswordGenerator.Services
                 throw new Exception("Error deleting folder");
             }
         }
+    }
 }

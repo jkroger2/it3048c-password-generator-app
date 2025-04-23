@@ -14,17 +14,18 @@ namespace PasswordGenerator.Models.ViewModels
         private readonly AppState _appState;
 
         [ObservableProperty]
-        private ObservableCollection<Account> accounts = new();
+        public ObservableCollection<Account> accounts = new();
 
         [ObservableProperty]
-        private ObservableCollection<Folder> folders = new();
+        public ObservableCollection<Folder> folders = new();
 
         [ObservableProperty]
         private bool isLoading;
 
-        public VaultViewModel(AccountService accountService, AppState appState)
+        public VaultViewModel(AccountService accountService, FolderService folderService, AppState appState)
         {
             _accountService = accountService;
+            _folderService = folderService;
             _appState = appState;
         }
 
@@ -37,9 +38,8 @@ namespace PasswordGenerator.Models.ViewModels
 
                 User user = _appState.GetUser();
 
-                var accountList = await _accountService.GetUserAccounts(user);
-
-                Accounts = new ObservableCollection<Account>(accountList);
+                var accountsList = await _accountService.GetUserAccounts(user);
+                Accounts = new ObservableCollection<Account>(accountsList ?? []);
             }
             finally
             {
@@ -56,9 +56,9 @@ namespace PasswordGenerator.Models.ViewModels
 
                 User user = _appState.GetUser();
 
-                var folderList = await _folderService.GetUserFolders(user);
-
-                Folders = new ObservableCollection<Folder>(folderList);
+                var foldersList = await _folderService.GetUserFolders(user);
+                Folders = new ObservableCollection<Folder>(foldersList ?? []);
+   
             }
             finally
             {

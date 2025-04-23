@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordGenerator.Views.AddAccountView"
+             Title="Add Password">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Add New Item" FontAttributes="Bold" FontSize="20" />
+
+            <Entry Text="{Binding Name}" 
+                   Placeholder="Name" />
+            <Entry Text="{Binding Username}" 
+                   Placeholder="Username" />
+            <Entry Text="{Binding Password}" 
+                   Placeholder="Password" 
+                   IsPassword="True" />
+            <Entry Text="{Binding Url}" 
+                   Placeholder="URL" 
+                   Keyboard="Url" />
+
+            <Picker Title="Folder"
+                    ItemsSource="{Binding Folders}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedFolder}" />
+            
+            <Button Text="Save"
+                    BackgroundColor="MediumPurple"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

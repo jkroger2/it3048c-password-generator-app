@@ -3,10 +3,10 @@ using PasswordGenerator.Models.ViewModels;
 
 namespace PasswordGenerator.Views
 {
-    public partial class Login : ContentPage
+    public partial class LoginView : ContentPage
     {
         private readonly LoginViewModel _viewModel;
-        public Login(LoginViewModel viewModel)
+        public LoginView(LoginViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = _viewModel = viewModel;
@@ -39,7 +39,7 @@ namespace PasswordGenerator.Views
 
         private async void GoToRegisterPage(object sender, EventArgs e)
         {
-            Register registerPage = ((App)Application.Current).Services.GetService<Register>();
+            RegisterView registerPage = ((App)Application.Current).Services.GetService<RegisterView>();
             await Navigation.PushAsync(registerPage);
         }
     }

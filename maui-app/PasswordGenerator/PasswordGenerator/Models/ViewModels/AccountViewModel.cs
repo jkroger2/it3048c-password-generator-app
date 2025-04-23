@@ -2,20 +2,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-using PasswordGenerator.Models;
 using PasswordGenerator.Services;
+using PasswordGenerator.Models;
 
 namespace PasswordGenerator.Models.ViewModels
 {
-    public partial class EditAccountViewModel : ObservableObject
+    public partial class AccountViewModel : ObservableObject
     {
         private readonly AccountService _accountService;
         private readonly AppState _appState;
 
-        private Account _originalAccount;
-
-        [ObservableProperty]
-        private string accountId;
+        public Account _account;
 
         [ObservableProperty]
         private string name;
@@ -33,10 +30,10 @@ namespace PasswordGenerator.Models.ViewModels
         private string folderId;
 
         [ObservableProperty]
-        private Folder selectedFolder;
+        private ObservableCollection<Folder> folders = new();
 
         [ObservableProperty]
-        private ObservableCollection<Folder> folders = new();
+        private Folder selectedFolder;
 
         [ObservableProperty]
         private bool hidePassword = true;
@@ -44,7 +41,7 @@ namespace PasswordGenerator.Models.ViewModels
         [ObservableProperty]
         private bool isLoading;
 
-        public EditAccountViewModel(AccountService accountService, AppState appState)
+        public AccountViewModel(AccountService accountService, AppState appState)
         {
             _accountService = accountService;
             _appState = appState;
@@ -52,9 +49,8 @@ namespace PasswordGenerator.Models.ViewModels
 
         public void SetAccount(Account account)
         {
-            _originalAccount = account;
+            _account = account;
 
-            AccountId = account.Id;
             Name = account.Name;
             Username = account.Username;
             Password = account.Password;
@@ -62,54 +58,6 @@ namespace PasswordGenerator.Models.ViewModels
             FolderId = account.FolderId;
 
             selectedFolder = Folders.FirstOrDefault(f => f.Id == account.FolderId);
-        }
-
-        public void SetFolders(ObservableCollection<Folder> folders)
-        {
-            Folders = folders;
-        }
-
-        public async Task<OperationResult> UpdateAccountAsync()
-        {
-            try
-            {
-
-                isLoading = true;
-
-                if (_originalAccount == null)
-                {
-                    return new OperationResult
-                    {
-                        Success = false,
-                        Message = "Account not loaded."
-                    };
-                }
-
-                if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
-                {
-                    return new OperationResult
-                    {
-                        Success = false,
-                        Message = "Name, username, and password cannot be empty."
-                    };
-                }
-
-                User user = _appState.GetUser();
-
-                Account updatedAccount = await _accountService.UpdateAccount(user, AccountId, Name, Username, Password, Url, selectedFolder.Id);
-
-                SetAccount(updatedAccount);
-
-                return new OperationResult
-                {
-                    Success = true,
-                    Message = "Account updated successfully.",
-                };
-            }
-            finally
-            {
-                isLoading = false;
-            }
         }
 
         [RelayCommand]
@@ -125,6 +73,37 @@ namespace PasswordGenerator.Models.ViewModels
         public void ToggleVisibility()
         {
             HidePassword = !HidePassword;
+        }
+
+        public async Task<OperationResult> DeleteAccountAsync()
+        {
+            try
+            {
+                isLoading = true;
+
+                if (_account == null)
+                {
+                    return new OperationResult
+                    {
+                        Success = false,
+                        Message = "Account not loaded."
+                    };
+                }
+
+                User user = _appState.GetUser();
+
+                await _accountService.DeleteAccount(user, _account.Id);
+
+                return new OperationResult
+                {
+                    Success = true,
+                    Message = "Account deleted successfully."
+                };
+            }
+            finally
+            {
+                isLoading = false;
+            }
         }
     }
 }

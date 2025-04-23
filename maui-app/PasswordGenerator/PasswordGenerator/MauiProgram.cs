@@ -41,15 +41,25 @@ namespace PasswordGenerator
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<VaultViewModel>();
+            builder.Services.AddTransient<AccountViewModel>();
             builder.Services.AddTransient<AddAccountViewModel>();
+            builder.Services.AddTransient<EditAccountViewModel>();
+            builder.Services.AddTransient<FolderViewModel>();
+            builder.Services.AddTransient<AddFolderViewModel>();
+            builder.Services.AddTransient<EditFolderViewModel>();
             builder.Services.AddTransient<PasswordGeneratorViewModel>();
 
             // Register Pages
-            builder.Services.AddTransient<Login>();
-            builder.Services.AddTransient<Register>();
-            builder.Services.AddTransient<Vault>();
-            builder.Services.AddTransient<AddAccount>();
-            builder.Services.AddTransient<Views.PasswordGenerator>();
+            builder.Services.AddTransient<LoginView>();
+            builder.Services.AddTransient<RegisterView>();
+            builder.Services.AddTransient<VaultView>();
+            builder.Services.AddTransient<AccountView>();
+            builder.Services.AddTransient<AddAccountView>();
+            builder.Services.AddTransient<EditAccountView>();
+            builder.Services.AddTransient<FolderView>();
+            builder.Services.AddTransient<AddFolderView>();
+            builder.Services.AddTransient<EditFolderView>();
+            builder.Services.AddTransient<PasswordGeneratorView>();
 
 
 

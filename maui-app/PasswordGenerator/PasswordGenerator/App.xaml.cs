@@ -11,8 +11,8 @@ namespace PasswordGenerator
             InitializeComponent();
             Services = services;
 
-            var loginPage = Services.GetService<Login>();
-            MainPage = new NavigationPage(loginPage);
+            var loginView = Services.GetService<LoginView>();
+            MainPage = new NavigationPage(loginView);
         }
     }
 }

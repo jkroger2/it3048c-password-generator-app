@@ -12,17 +12,17 @@
      <TabBar>
          <ShellContent
              Title="Vault"
-             Icon="lock.png"
-             ContentTemplate="{DataTemplate pages:Vault}" />
+             Icon="lock_icon.png"
+             ContentTemplate="{DataTemplate pages:VaultView}" />
  
          <ShellContent
              Title="Generator"
-             Icon="refresh.png"
-             ContentTemplate="{DataTemplate pages:PasswordGenerator}" />
+             Icon="password_icon.png"
+             ContentTemplate="{DataTemplate pages:PasswordGeneratorView}" />
  
          <ShellContent
              Title="Settings"
-             Icon="settings.png"
-             ContentTemplate="{DataTemplate pages:Settings}" />
+             Icon="settings_icon.png"
+             ContentTemplate="{DataTemplate pages:SettingsView}" />
      </TabBar>
  </Shell>

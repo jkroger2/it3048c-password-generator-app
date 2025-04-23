@@ -3,9 +3,9 @@ using Microsoft.Maui.Controls;
 
 namespace PasswordGenerator.Views
 {
-    public partial class Settings : ContentPage
+    public partial class SettingsView : ContentPage
     {
-        public Settings()
+        public SettingsView()
         {
             InitializeComponent();
         }

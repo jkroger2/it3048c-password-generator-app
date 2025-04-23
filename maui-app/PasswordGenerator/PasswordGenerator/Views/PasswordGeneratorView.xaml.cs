@@ -6,12 +6,12 @@ using PasswordGenerator.Models.ViewModels;
 
 namespace PasswordGenerator.Views
 {
-    public partial class PasswordGenerator : ContentPage
+    public partial class PasswordGeneratorView : ContentPage
     {
         private readonly PasswordGeneratorViewModel _viewModel;
 
 
-        public PasswordGenerator(PasswordGeneratorViewModel viewModel)
+        public PasswordGeneratorView(PasswordGeneratorViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = _viewModel = viewModel;

@@ -5,19 +5,20 @@ using PasswordGenerator.Models.ViewModels;
 
 namespace PasswordGenerator.Views
 {
-    public partial class EditAccount : ContentPage
+    public partial class EditAccountView : ContentPage
     {
         private readonly EditAccountViewModel _viewModel;
-        public EditAccount()
+        public EditAccountView(EditAccountViewModel viewModel)
         {
             InitializeComponent();
+            BindingContext = _viewModel = viewModel;
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
             try
             {
-                var result = await _viewModel.SaveAsync();
+                var result = await _viewModel.UpdateAccountAsync();
 
                 if (!result.Success)
                 {
@@ -27,7 +28,7 @@ namespace PasswordGenerator.Views
 
                 await DisplayAlert("Saved", "Changes have been saved.", "OK");
 
-                Vault vaultPage = ((App)Application.Current).Services.GetService<Vault>();
+                VaultView vaultPage = ((App)Application.Current).Services.GetService<VaultView>();
                 await Navigation.PushAsync(vaultPage);
             }
             catch (Exception ex)
